@@ -118,7 +118,7 @@ const FluidSchema = () => {
             <circle cx={node.x} cy={node.y} r="12" fill="#00f3ff" fillOpacity="0.05" />
             <foreignObject x={node.x - 8} y={node.y - 8} width="16" height="16">
               <div className="text-cyber-blue flex items-center justify-center h-full">
-                {React.cloneElement(node.icon as React.ReactElement, { size: 10 })}
+                {React.cloneElement(node.icon as React.ReactElement<any>, { size: 10 })}
               </div>
             </foreignObject>
             <text x={node.x} y={node.y + 25} textAnchor="middle" fill="#00f3ff" className="text-[6px] font-mono tracking-widest uppercase opacity-60">
