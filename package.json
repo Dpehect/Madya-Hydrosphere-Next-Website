@@ -16,7 +16,6 @@
     "@react-three/postprocessing": "latest",
     "@splinetool/react-spline": "latest",
     "@splinetool/runtime": "latest",
-    "@studio-freight/lenis": "latest",
     "@theatre/core": "latest",
     "@theatre/studio": "latest",
     "canvas-confetti": "latest",

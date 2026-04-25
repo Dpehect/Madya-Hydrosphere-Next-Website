@@ -10,7 +10,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { create } from "zustand";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Lenis from "@studio-freight/lenis";
+import Lenis from "lenis";
 import { Settings, Cpu, Droplets, Activity, Share2, ShieldCheck, Crosshair, Zap, Layers, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import dynamic from "next/dynamic";
