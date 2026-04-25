@@ -1,0 +1,211 @@
+"use client";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Globe, Radio, Target, Activity, Map as MapIcon, ChevronRight, Share2, Layers, Box } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+const regions = [
+  { id: "ist", name: "İSTANBUL", x: 15, y: 32, load: "%94", nodes: 42 },
+  { id: "ank", name: "ANKARA", x: 42, y: 44, load: "%82", nodes: 28 },
+  { id: "izm", name: "İZMİR", x: 10, y: 55, load: "%78", nodes: 21 },
+  { id: "ant", name: "ANTALYA", x: 28, y: 78, load: "%65", nodes: 15 },
+  { id: "tra", name: "TRABZON", x: 78, y: 28, load: "%45", nodes: 12 },
+  { id: "ada", name: "ADANA", x: 55, y: 75, load: "%88", nodes: 18 },
+  { id: "bur", name: "BURSA", x: 18, y: 40, load: "%72", nodes: 14 },
+  { id: "gaz", name: "GAZİANTEP", x: 70, y: 78, load: "%68", nodes: 11 },
+  { id: "kon", name: "KONYA", x: 40, y: 65, load: "%54", nodes: 9 },
+  { id: "kay", name: "KAYSERİ", x: 55, y: 52, load: "%48", nodes: 8 },
+  { id: "diy", name: "DİYARBAKIR", x: 85, y: 68, load: "%42", nodes: 7 },
+  { id: "esk", name: "ESKİŞEHİR", x: 30, y: 48, load: "%62", nodes: 10 },
+  { id: "sam", name: "SAMSUN", x: 62, y: 25, load: "%51", nodes: 6 },
+  { id: "den", name: "DENİZLİ", x: 15, y: 65, load: "%38", nodes: 5 },
+  { id: "mer", name: "MERSİN", x: 48, y: 82, load: "%59", nodes: 10 },
+];
+
+export default function NetworkPage() {
+  const [active, setActive] = useState(regions[0]);
+
+  return (
+    <main className="min-h-screen bg-black pt-32 pb-20 px-4 md:px-10 lg:px-20 overflow-hidden relative selection:bg-cyber-blue selection:text-black">
+      {/* Background Matrix Grid */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,#00f3ff05,transparent_70%)] pointer-events-none" />
+      
+      <div className="container mx-auto max-w-[1700px] relative z-20">
+        
+        {/* NEW SEPARATED LAYOUT: Grid of 3 columns */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+           
+           {/* COLUMN 1: NAVIGATION & SELECTOR (Dedicated Sidebar Area) */}
+           <div className="lg:col-span-3 space-y-12">
+              <div className="space-y-4">
+                 <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 rounded-full bg-cyber-blue animate-ping" />
+                    <span className="text-[10px] font-mono text-cyber-blue tracking-[0.5em] uppercase px-4 py-1 border border-cyber-blue/20 rounded-full bg-cyber-blue/5">Ağ Operasyonları</span>
+                 </div>
+                 <h1 className="text-5xl md:text-6xl font-bold font-syncopate text-white uppercase tracking-tighter leading-none">
+                    MİLLİ <br />
+                    <span className="text-cyber-blue">MATRİS</span>
+                 </h1>
+              </div>
+
+              {/* Redesigned Sidebar List - No Overlap */}
+              <div className="glass border border-white/5 p-8 rounded-[2.5rem] bg-black/40 space-y-4">
+                 <span className="text-[8px] font-mono text-neutral-600 uppercase tracking-widest block mb-4">Bölge Seçimi</span>
+                 <div className="space-y-2">
+                    {regions.map((reg) => (
+                      <button 
+                        key={reg.id} 
+                        onClick={() => setActive(reg)}
+                        className={cn(
+                          "w-full flex items-center justify-between p-4 rounded-2xl transition-all group",
+                          active.id === reg.id ? "bg-cyber-blue text-black font-bold scale-[1.05]" : "hover:bg-white/5 text-neutral-500"
+                        )}
+                      >
+                         <span className="text-[10px] font-mono tracking-widest">{reg.name}</span>
+                         <ChevronRight className={cn("w-4 h-4", active.id === reg.id ? "rotate-90" : "group-hover:translate-x-1")} />
+                      </button>
+                    ))}
+                 </div>
+              </div>
+
+              {/* Quick Metrics */}
+              <div className="grid grid-cols-1 gap-4">
+                 <div className="p-6 glass border border-white/5 rounded-3xl flex items-center gap-6">
+                    <Layers className="w-5 h-5 text-cyber-blue" />
+                    <div>
+                       <span className="block text-[8px] text-neutral-600 uppercase font-mono">Düğümler</span>
+                       <span className="text-2xl font-bold text-white font-mono tracking-tighter">81 AKTİF</span>
+                    </div>
+                 </div>
+              </div>
+           </div>
+
+           {/* COLUMN 2: THE 3D MAP STAGE (Full Breathing Room) */}
+           <div className="lg:col-span-6 relative h-[500px] lg:h-[700px] flex items-center justify-center">
+              <div className="absolute inset-0 bg-cyber-blue/5 blur-[120px] rounded-full" />
+              
+              <div className="relative w-full h-full perspective-[2000px]">
+                 <motion.div 
+                   initial={{ rotateX: 45, rotateZ: -10, opacity: 0, scale: 0.8 }}
+                   animate={{ opacity: 1, scale: 1 }}
+                   transition={{ duration: 1.5 }}
+                   className="w-full h-full relative"
+                 >
+                    {/* Grid Floor */}
+                    <div className="absolute inset-0 border border-white/5 rounded-[4rem] bg-black/40 overflow-hidden">
+                       <div className="absolute inset-0" 
+                            style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+                       
+                       {/* Connection Beams */}
+                       <svg className="absolute inset-0 w-full h-full pointer-events-none z-10">
+                          {regions.map((reg) => (
+                             <motion.line 
+                                key={reg.id}
+                                x1="50%" y1="50%"
+                                x2={`${reg.x}%`} y2={`${reg.y}%`}
+                                stroke="rgba(0, 243, 255, 0.2)"
+                                strokeWidth="0.5"
+                                strokeDasharray="4 4"
+                             />
+                          ))}
+                       </svg>
+
+                       {/* Interactive Nodes */}
+                       {regions.map((reg, i) => (
+                          <motion.div
+                            key={reg.id}
+                            className="absolute z-20 cursor-pointer"
+                            style={{ left: `${reg.x}%`, top: `${reg.y}%` }}
+                            onClick={() => setActive(reg)}
+                          >
+                             <motion.div 
+                               animate={{ height: [30, 80, 30], opacity: [0.1, 0.4, 0.1] }}
+                               transition={{ duration: 2 + i, repeat: Infinity }}
+                               className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[1px] bg-gradient-to-t from-cyber-blue to-transparent" 
+                             />
+                             <div className={cn(
+                               "relative w-4 h-4 rounded-full border-2 border-black transition-all",
+                               active.id === reg.id ? "bg-cyber-blue scale-150 shadow-[0_0_20px_#00f3ff]" : "bg-neutral-800"
+                             )} />
+                             <div className="absolute top-6 left-1/2 -translate-x-1/2 whitespace-nowrap text-[8px] font-mono text-neutral-500 uppercase tracking-widest">
+                                {reg.name}
+                             </div>
+                          </motion.div>
+                       ))}
+                    </div>
+
+                    {/* Central Core */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 z-30">
+                       <div className="w-full h-full bg-cyber-blue/20 rounded-full blur-3xl animate-pulse" />
+                       <div className="absolute inset-0 flex items-center justify-center">
+                          <Box className="w-12 h-12 text-cyber-blue animate-spin-slow" />
+                       </div>
+                    </div>
+                 </motion.div>
+              </div>
+           </div>
+
+           {/* COLUMN 3: REGIONAL HUD (Dedicated Sidebar) */}
+           <div className="lg:col-span-3">
+              <AnimatePresence mode="wait">
+                 <motion.div 
+                   key={active.id}
+                   initial={{ opacity: 0, x: 50 }}
+                   animate={{ opacity: 1, x: 0 }}
+                   exit={{ opacity: 0, x: -50 }}
+                   className="glass border border-white/10 p-10 rounded-[3rem] bg-gradient-to-br from-cyber-blue/10 to-transparent h-full flex flex-col justify-between"
+                 >
+                    <div className="space-y-10">
+                       <div className="space-y-4">
+                          <div className="w-16 h-16 rounded-3xl bg-cyber-blue/10 flex items-center justify-center border border-cyber-blue/20">
+                             <MapIcon className="w-8 h-8 text-cyber-blue" />
+                          </div>
+                          <div>
+                             <h3 className="text-4xl font-bold font-syncopate text-white uppercase">{active.name}</h3>
+                             <p className="text-[10px] text-neutral-500 font-mono uppercase tracking-[0.4em]">KOMUTA MERKEZİ</p>
+                          </div>
+                       </div>
+
+                       <div className="space-y-6">
+                          <div className="p-6 bg-white/5 rounded-2xl border border-white/5">
+                             <span className="block text-[8px] font-mono text-neutral-500 uppercase mb-2">Saha Trafiği</span>
+                             <span className="text-3xl font-bold text-white font-mono">{active.load}</span>
+                          </div>
+                          <div className="p-6 bg-white/5 rounded-2xl border border-white/5">
+                             <span className="block text-[8px] font-mono text-neutral-500 uppercase mb-2">Aktif Ekip</span>
+                             <span className="text-3xl font-bold text-white font-mono">{active.nodes}</span>
+                          </div>
+                       </div>
+                    </div>
+
+                    <button className="w-full py-5 bg-cyber-blue text-black font-bold text-xs rounded-2xl hover:bg-white transition-all uppercase tracking-[0.3em] shadow-[0_20px_50px_rgba(0,243,255,0.2)]">
+                       ANALİZ RAPORU
+                    </button>
+                 </motion.div>
+              </AnimatePresence>
+           </div>
+
+        </div>
+
+        {/* BOTTOM DECORATIVE HUD */}
+        <div className="mt-20 flex justify-between items-center glass border border-white/5 p-8 rounded-[3rem] bg-black/60">
+           <div className="flex gap-12 font-mono">
+              <div>
+                 <span className="block text-[8px] text-neutral-500 uppercase">Gecikme</span>
+                 <span className="text-sm text-white">12 MS</span>
+              </div>
+              <div>
+                 <span className="block text-[8px] text-neutral-500 uppercase">Protokol</span>
+                 <span className="text-sm text-cyber-blue">MAZ-SYNC</span>
+              </div>
+           </div>
+           <div className="flex items-center gap-4">
+              <Activity className="w-5 h-5 text-cyber-blue animate-pulse" />
+              <div className="h-8 w-px bg-white/10" />
+              <span className="text-[10px] text-white font-mono uppercase tracking-widest">SİSTEM ÇEKİRDEĞİ AKTİF</span>
+           </div>
+        </div>
+      </div>
+    </main>
+  );
+}
