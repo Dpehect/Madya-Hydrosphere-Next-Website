@@ -79,7 +79,7 @@ export default function OperationsPage() {
               </div>
            </div>
            <div className="lg:col-span-2 space-y-6">
-              <div className="relative glass border border-white/10 rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 h-[400px] md:h-[550px] overflow-hidden group">
+              <div className="relative glass border border-white/10 rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 min-h-[450px] md:h-[550px] overflow-hidden group">
                  <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(0,243,255,0.05),transparent_70%)]" />
                  <div className="relative z-10 flex flex-col h-full justify-between">
                     <div className="flex justify-between items-start">
@@ -107,7 +107,7 @@ export default function OperationsPage() {
                           </div>
                        </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                        <div className="p-3 md:p-4 bg-white/5 rounded-2xl border border-white/5">
                           <span className="block text-[7px] md:text-[8px] font-mono text-neutral-500 uppercase mb-2">Kapasite</span>
                           <div className="flex items-center gap-2 md:gap-4">
@@ -131,7 +131,7 @@ export default function OperationsPage() {
               </div>
            </div>
            <div className="space-y-6">
-              <div className="p-8 glass border border-white/5 rounded-[2.5rem] bg-black/40 h-full flex flex-col">
+              <div className="p-6 md:p-8 glass border border-white/5 rounded-[2rem] md:rounded-[2.5rem] bg-black/40 min-h-[400px] md:h-full flex flex-col">
                  <div className="flex items-center justify-between mb-8 border-b border-white/10 pb-4">
                     <div className="flex items-center gap-2">
                        <Terminal className="w-4 h-4 text-cyber-blue" />
