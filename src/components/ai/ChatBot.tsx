@@ -3,8 +3,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, X, Send, Bot, Cpu, Sparkles, Database, ShieldAlert } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-// Simulated AI Knowledge Base
 const KNOWLEDGE = [
   { keywords: ["servis", "tamir", "usta"], response: "Madya servis ağı 81 ilde aktiftir. Bölgesel ekiplerimiz yaklaşık 45 dakika içinde siber-tesisat ekipmanlarıyla adresinize ulaşır." },
   { keywords: ["akıllı", "vana", "sensör"], response: "MAZ (Madya Akış Zekası), evinizdeki tüm su akışını milisaniyeler içinde kontrol eder. Bir sızıntı algılandığında ana vanayı otomatik olarak kapatır." },
@@ -12,7 +10,6 @@ const KNOWLEDGE = [
   { keywords: ["merhaba", "selam"], response: "Merhaba! Ben Madya'nın yapay zeka çekirdeği MAZ. Tesisatınızın dijital geleceği hakkında ne bilmek istersiniz?" },
   { keywords: ["garanti", "güven"], response: "Tüm akıllı bileşenlerimiz 1986'dan beri süregelen Madya güvencesiyle 10 yıl değişim garantilidir." },
 ];
-
 export default function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
@@ -21,33 +18,24 @@ export default function ChatBot() {
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
   }, [messages, isTyping]);
-
   const handleSend = async () => {
     if (!input.trim() || isTyping) return;
-
     const userMsg = { role: "user", content: input };
     setMessages(prev => [...prev, userMsg]);
     setInput("");
     setIsTyping(true);
-
-    // Simulate "Real AI" thinking and multi-step response
     setTimeout(() => {
       let finalContent = "Üzgünüm, bu spesifik teknik veri setine erişimim kısıtlı. Ancak Madya'nın genel operasyonel standartları çerçevesinde yardımcı olabilirim.";
-      
       const lowerInput = input.toLowerCase();
       const match = KNOWLEDGE.find(k => k.keywords.some(kw => lowerInput.includes(kw)));
-      
       if (match) finalContent = match.response;
-
       setMessages(prev => [...prev, { role: "bot", content: finalContent }]);
       setIsTyping(false);
     }, 1500);
   };
-
   return (
     <div className="fixed bottom-10 right-10 z-[200]">
       <AnimatePresence>
@@ -58,7 +46,6 @@ export default function ChatBot() {
             exit={{ opacity: 0, y: 50, scale: 0.9, filter: "blur(10px)" }}
             className="absolute bottom-24 right-0 w-[calc(100vw-2rem)] sm:w-[400px] h-[500px] md:h-[600px] glass border border-cyber-blue/30 rounded-[2.5rem] md:rounded-[3rem] shadow-[0_0_100px_rgba(0,243,255,0.1)] flex flex-col overflow-hidden bg-black/90 backdrop-blur-xl"
           >
-            {/* AI HEADER */}
             <div className="p-8 border-b border-white/5 bg-gradient-to-r from-cyber-blue/20 to-transparent flex justify-between items-center relative overflow-hidden">
               <div className="absolute top-0 left-0 w-full h-1 bg-cyber-blue animate-pulse" />
               <div className="flex items-center gap-4 relative z-10">
@@ -79,8 +66,6 @@ export default function ChatBot() {
                 <X className="w-6 h-6" />
               </button>
             </div>
-
-            {/* AI MESSAGES */}
             <div ref={scrollRef} className="flex-1 overflow-y-auto p-8 space-y-8 no-scrollbar bg-black/95">
               {messages.map((msg, i) => (
                 <motion.div 
@@ -108,8 +93,6 @@ export default function ChatBot() {
                 </div>
               )}
             </div>
-
-            {/* AI INPUT */}
             <div className="p-8 border-t border-white/5 bg-black/60 relative">
               <div className="relative flex items-center gap-4">
                 <input 
@@ -134,8 +117,6 @@ export default function ChatBot() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* FLOATING TRIGGER */}
       <button 
         onClick={() => setIsOpen(!isOpen)}
         className="relative group w-20 h-20 rounded-[2rem] bg-black border border-cyber-blue/30 flex items-center justify-center transition-all hover:scale-110 active:scale-95 overflow-hidden shadow-[0_20px_80px_rgba(0,243,255,0.2)]"
@@ -149,7 +130,6 @@ export default function ChatBot() {
              <span className="text-[6px] text-cyber-blue font-mono mt-1 font-bold">MAZ</span>
           </div>
         )}
-        {/* Glow effect */}
         <div className="absolute -inset-4 bg-cyber-blue/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
       </button>
     </div>

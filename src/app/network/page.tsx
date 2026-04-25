@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Globe, Radio, Target, Activity, Map as MapIcon, ChevronRight, Share2, Layers, Box } from "lucide-react";
 import { cn } from "@/lib/utils";
-
 const regions = [
   { id: "ist", name: "İSTANBUL", x: 15, y: 32, load: "%94", nodes: 42 },
   { id: "ank", name: "ANKARA", x: 42, y: 44, load: "%82", nodes: 28 },
@@ -21,21 +20,13 @@ const regions = [
   { id: "den", name: "DENİZLİ", x: 15, y: 65, load: "%38", nodes: 5 },
   { id: "mer", name: "MERSİN", x: 48, y: 82, load: "%59", nodes: 10 },
 ];
-
 export default function NetworkPage() {
   const [active, setActive] = useState(regions[0]);
-
   return (
     <main className="min-h-screen bg-black pt-32 pb-20 px-4 md:px-10 lg:px-20 overflow-hidden relative selection:bg-cyber-blue selection:text-black">
-      {/* Background Matrix Grid */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,#00f3ff05,transparent_70%)] pointer-events-none" />
-      
       <div className="container mx-auto max-w-[1700px] relative z-20">
-        
-        {/* NEW SEPARATED LAYOUT: Grid of 3 columns */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-           
-           {/* COLUMN 1: NAVIGATION & SELECTOR (Dedicated Sidebar Area) */}
            <div className="lg:col-span-3 space-y-12">
               <div className="space-y-4">
                  <div className="flex items-center gap-3">
@@ -47,8 +38,6 @@ export default function NetworkPage() {
                     <span className="text-cyber-blue">MATRİS</span>
                  </h1>
               </div>
-
-              {/* Redesigned Sidebar List - No Overlap */}
               <div className="glass border border-white/5 p-8 rounded-[2.5rem] bg-black/40 space-y-4">
                  <span className="text-[8px] font-mono text-neutral-600 uppercase tracking-widest block mb-4">Bölge Seçimi</span>
                  <div className="space-y-2">
@@ -67,8 +56,6 @@ export default function NetworkPage() {
                     ))}
                  </div>
               </div>
-
-              {/* Quick Metrics */}
               <div className="grid grid-cols-1 gap-4">
                  <div className="p-6 glass border border-white/5 rounded-3xl flex items-center gap-6">
                     <Layers className="w-5 h-5 text-cyber-blue" />
@@ -79,11 +66,8 @@ export default function NetworkPage() {
                  </div>
               </div>
            </div>
-
-           {/* COLUMN 2: THE 3D MAP STAGE (Full Breathing Room) */}
            <div className="lg:col-span-6 relative h-[500px] lg:h-[700px] flex items-center justify-center">
               <div className="absolute inset-0 bg-cyber-blue/5 blur-[120px] rounded-full" />
-              
               <div className="relative w-full h-full perspective-[2000px]">
                  <motion.div 
                    initial={{ rotateX: 45, rotateZ: -10, opacity: 0, scale: 0.8 }}
@@ -91,12 +75,9 @@ export default function NetworkPage() {
                    transition={{ duration: 1.5 }}
                    className="w-full h-full relative"
                  >
-                    {/* Grid Floor */}
                     <div className="absolute inset-0 border border-white/5 rounded-[4rem] bg-black/40 overflow-hidden">
                        <div className="absolute inset-0" 
                             style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
-                       
-                       {/* Connection Beams */}
                        <svg className="absolute inset-0 w-full h-full pointer-events-none z-10">
                           {regions.map((reg) => (
                              <motion.line 
@@ -109,8 +90,6 @@ export default function NetworkPage() {
                              />
                           ))}
                        </svg>
-
-                       {/* Interactive Nodes */}
                        {regions.map((reg, i) => (
                           <motion.div
                             key={reg.id}
@@ -133,8 +112,6 @@ export default function NetworkPage() {
                           </motion.div>
                        ))}
                     </div>
-
-                    {/* Central Core */}
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 z-30">
                        <div className="w-full h-full bg-cyber-blue/20 rounded-full blur-3xl animate-pulse" />
                        <div className="absolute inset-0 flex items-center justify-center">
@@ -144,8 +121,6 @@ export default function NetworkPage() {
                  </motion.div>
               </div>
            </div>
-
-           {/* COLUMN 3: REGIONAL HUD (Dedicated Sidebar) */}
            <div className="lg:col-span-3">
               <AnimatePresence mode="wait">
                  <motion.div 
@@ -165,7 +140,6 @@ export default function NetworkPage() {
                              <p className="text-[10px] text-neutral-500 font-mono uppercase tracking-[0.4em]">KOMUTA MERKEZİ</p>
                           </div>
                        </div>
-
                        <div className="space-y-6">
                           <div className="p-6 bg-white/5 rounded-2xl border border-white/5">
                              <span className="block text-[8px] font-mono text-neutral-500 uppercase mb-2">Saha Trafiği</span>
@@ -177,17 +151,13 @@ export default function NetworkPage() {
                           </div>
                        </div>
                     </div>
-
                     <button className="w-full py-5 bg-cyber-blue text-black font-bold text-xs rounded-2xl hover:bg-white transition-all uppercase tracking-[0.3em] shadow-[0_20px_50px_rgba(0,243,255,0.2)]">
                        ANALİZ RAPORU
                     </button>
                  </motion.div>
               </AnimatePresence>
            </div>
-
         </div>
-
-        {/* BOTTOM DECORATIVE HUD */}
         <div className="mt-20 flex justify-between items-center glass border border-white/5 p-8 rounded-[3rem] bg-black/60">
            <div className="flex gap-12 font-mono">
               <div>

@@ -18,14 +18,10 @@ import Link from "next/link";
 import * as THREE from "three";
 import { ArrowRight, Zap, Radio, Terminal, Box, Activity, Droplets, Settings, ShieldCheck, Cpu } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-// --- SNAPPY UTILITIES: TEXT SCRAMBLE ---
 const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*";
-
 const TextScramble = ({ text, className }: { text: string; className?: string }) => {
   const [displayText, setDisplayText] = useState(text);
   const [isHovered, setIsHovered] = useState(false);
-
   const scramble = async () => {
     let iteration = 0;
     const interval = setInterval(() => {
@@ -38,16 +34,13 @@ const TextScramble = ({ text, className }: { text: string; className?: string })
           })
           .join("")
       );
-
       if (iteration >= text.length) clearInterval(interval);
       iteration += 1 / 3;
     }, 30);
   };
-
   React.useEffect(() => {
     scramble();
   }, []);
-
   return (
     <motion.span 
       onMouseEnter={() => {
@@ -62,16 +55,12 @@ const TextScramble = ({ text, className }: { text: string; className?: string })
     </motion.span>
   );
 };
-
-// --- SNAPPY UTILITIES: KINETIC GRID ---
 const KineticGrid = () => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  
   const handleMouseMove = (e: React.MouseEvent) => {
     const { clientX, clientY } = e;
     setMousePos({ x: clientX, y: clientY });
   };
-
   return (
     <div 
       onMouseMove={handleMouseMove}
@@ -84,13 +73,10 @@ const KineticGrid = () => {
     </div>
   );
 };
-
-// --- NEW COMPONENT: FLUID SCHEMA (TECHNICAL DIAGRAM) ---
 const FluidSchema = () => {
   return (
     <div className="relative w-full h-full flex items-center justify-center p-10">
       <svg width="100%" height="100%" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-[0_0_20px_rgba(0,243,255,0.3)]">
-        {/* Connection Lines */}
         <motion.path 
           d="M50 150 H350 M150 50 V250 M250 50 V250" 
           stroke="#00f3ff" 
@@ -100,8 +86,6 @@ const FluidSchema = () => {
           animate={{ pathLength: 1 }}
           transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
         />
-        
-        {/* Animated Fluid Paths */}
         {[
           "M50 150 H150", "M150 150 H250", "M250 150 H350",
           "M150 50 V150", "M150 150 V250",
@@ -117,8 +101,6 @@ const FluidSchema = () => {
             transition={{ duration: 2, repeat: Infinity, ease: "linear", delay: i * 0.2 }}
           />
         ))}
-
-        {/* Nodes */}
         {[
           { x: 150, y: 150, label: "HUB-01", icon: <Cpu className="w-4 h-4" /> },
           { x: 50, y: 150, label: "IN-01", icon: <Droplets className="w-4 h-4" /> },
@@ -144,8 +126,6 @@ const FluidSchema = () => {
             </text>
           </motion.g>
         ))}
-
-        {/* Data Readouts */}
         <g className="font-mono text-[5px] uppercase">
           <motion.text 
             x="20" y="30" fill="#00f3ff"
@@ -163,8 +143,6 @@ const FluidSchema = () => {
           </motion.text>
         </g>
       </svg>
-      
-      {/* Scanning Line */}
       <motion.div 
         className="absolute inset-x-0 h-px bg-cyber-blue/30 shadow-[0_0_10px_#00f3ff]"
         animate={{ top: ["0%", "100%", "0%"] }}
@@ -173,30 +151,21 @@ const FluidSchema = () => {
     </div>
   );
 };
-
-
-// --- HACKATHON CORE: THE NEURAL FLUID NEXUS ---
 const QuantumCore = () => {
   const group = useRef<THREE.Group>(null!);
-  
-  // Simplified Tendrils for performance
   const tendrils = useMemo(() => {
     return Array.from({ length: 8 }, () => ({
       r: 2 + Math.random() * 3,
       offset: Math.random() * Math.PI * 2,
     }));
   }, []);
-
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
-    group.current.rotation.z = t * 0.15; // Increased speed
+    group.current.rotation.z = t * 0.15; 
     group.current.rotation.y = t * 0.08;
-    
-    // Active pulse
     const s = 1 + Math.sin(t * 2) * 0.05;
     group.current.scale.set(s, s, s);
   });
-
   return (
     <PresentationControls
        global
@@ -224,8 +193,6 @@ const QuantumCore = () => {
             />
           </mesh>
         </Float>
-
-        {/* Neural Tendrils - Optimized */}
         {tendrils.map((ten, i) => (
           <mesh key={i} rotation={[ten.offset, ten.offset, 0]}>
              <torusGeometry args={[ten.r, 0.005, 4, 32]} />
@@ -243,16 +210,10 @@ const QuantumCore = () => {
     </PresentationControls>
   );
 };
-
-// --- INTERACTIVE NAVIGATION HUB ---
 const HackathonUI = () => {
   return (
     <div className="relative min-h-screen z-20 pointer-events-none">
-      
-      {/* Hero Content Section - REBORN AS MINIMAL ART */}
       <div className="h-screen flex flex-col items-center justify-center py-20 px-10">
-        
-        {/* Technical Watermark */}
         <div className="absolute top-10 left-10 space-y-1 opacity-40">
            <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-cyber-blue animate-pulse" />
@@ -260,21 +221,16 @@ const HackathonUI = () => {
            </div>
            <p className="text-[6px] font-mono text-neutral-500 uppercase tracking-widest">SoftBridge Solutions ürünüdür</p>
         </div>
-
-        {/* Central Identity - HYPER CREATIVE */}
         <div className="text-center space-y-8 relative group pointer-events-auto">
           <div className="absolute -inset-20 bg-cyber-blue/5 blur-[100px] rounded-full opacity-30" />
-          
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }} // Snappier ease
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }} 
             className="text-7xl md:text-[14rem] font-bold font-syncopate tracking-[0.15em] leading-none text-white drop-shadow-[0_0_80px_rgba(0,243,255,0.4)] relative z-10"
           >
             <TextScramble text="MADYA" />
           </motion.h1>
-
-
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -287,26 +243,18 @@ const HackathonUI = () => {
             <div className="w-px h-24 bg-gradient-to-b from-cyber-blue to-transparent" />
           </motion.div>
         </div>
-
-        {/* Minimal System Metrics */}
         <div className="absolute bottom-10 right-10 flex flex-col items-end gap-2 opacity-30 font-mono text-[8px] uppercase tracking-widest">
            <span>Lat: 39.9334° N</span>
            <span>Lon: 32.8597° E</span>
            <span className="text-cyber-blue">Active_Flow: 100%</span>
         </div>
-
-        {/* BOTTOM CENTER CREDIT */}
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 opacity-40">
            <p className="text-[10px] font-mono text-cyber-blue uppercase tracking-[0.5em] font-bold whitespace-nowrap">
               SoftBridge Solutions
            </p>
         </div>
       </div>
-
-      {/* DETAILED CONTENT SECTIONS */}
       <div className="pointer-events-auto bg-black/60 backdrop-blur-xl border-t border-white/5">
-        
-        {/* Vizyon Section */}
         <section className="py-40 border-b border-white/5 overflow-hidden">
           <div className="container mx-auto px-6">
             <div className="flex flex-col lg:flex-row gap-20 items-center">
@@ -344,12 +292,9 @@ const HackathonUI = () => {
                  <div className="absolute inset-0 bg-gradient-to-br from-cyber-blue/10 to-transparent" />
                  <FluidSchema />
               </motion.div>
-
             </div>
           </div>
         </section>
-
-        {/* Operasyon Section */}
         <section className="py-40 border-b border-white/5">
           <div className="container mx-auto px-6">
             <div className="text-center mb-32 space-y-4">
@@ -401,8 +346,6 @@ const HackathonUI = () => {
             </div>
           </div>
         </section>
-
-        {/* Footer with Credit */}
         <footer className="py-20 border-t border-white/5">
           <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-10">
              <div className="space-y-2">
@@ -420,20 +363,15 @@ const HackathonUI = () => {
           </div>
         </footer>
       </div>
-
-      {/* Cinematic Overlays */}
       <div className="fixed inset-0 z-10 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/80" />
       </div>
     </div>
   );
 };
-
 export default function HomePage() {
   return (
     <main className="min-h-screen w-full bg-black relative">
-      
-      {/* 3D WebGL Scene */}
       <div className="fixed inset-0 z-0">
         <Canvas>
           <PerspectiveCamera makeDefault position={[0, 0, 10]} />
@@ -446,18 +384,9 @@ export default function HomePage() {
           <ContactShadows position={[0, -4, 0]} opacity={0.4} scale={20} blur={2.4} far={4.5} />
         </Canvas>
       </div>
-
-      {/* Hackathon Interface Layer */}
       <HackathonUI />
-
-      {/* Kinetic Grid Background */}
       <KineticGrid />
-
-
-      {/* Grain & Noise Overlay */}
       <div className="fixed inset-0 z-30 pointer-events-none opacity-30 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay" />
-      
-      {/* Scanline Effect */}
       <div className="fixed inset-0 z-30 pointer-events-none opacity-10 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[size:100%_2px,3px_100%]" />
     </main>
   );

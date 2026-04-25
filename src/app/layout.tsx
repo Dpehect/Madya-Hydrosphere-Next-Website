@@ -1,41 +1,1 @@
-import type { Metadata } from "next";
-import { Inter, Syncopate } from "next/font/google";
-import "@/styles/globals.css";
-import SmoothScroll from "@/components/layout/SmoothScroll";
-import Navbar from "@/components/layout/Navbar";
-import ChatBot from "@/components/ai/ChatBot";
-
-import ThemeProvider from "@/components/layout/ThemeProvider";
-import PageTransition from "@/components/layout/PageTransition";
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const syncopate = Syncopate({ 
-  weight: ["400", "700"], 
-  subsets: ["latin"], 
-  variable: "--font-syncopate" 
-});
-
-export const metadata: Metadata = {
-  title: "MADYA | Tesisat Mühendisliğinin Geleceği",
-  description: "Akışkan mekaniği ve ileri tesisat çözümlerinde yeni nesil dijital platform.",
-};
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="tr">
-      <body className={`${inter.variable} ${syncopate.variable} antialiased`}>
-        <ThemeProvider>
-          <Navbar />
-          <SmoothScroll>
-            {children}
-          </SmoothScroll>
-          <ChatBot />
-        </ThemeProvider>
-      </body>
-    </html>
-  );
-}
+import type { Metadata } from "next";import { Inter, Syncopate } from "next/font/google";import "@/styles/globals.css";import SmoothScroll from "@/components/layout/SmoothScroll";import Navbar from "@/components/layout/Navbar";import ChatBot from "@/components/ai/ChatBot";import ThemeProvider from "@/components/layout/ThemeProvider";import PageTransition from "@/components/layout/PageTransition";const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });const syncopate = Syncopate({   weight: ["400", "700"],   subsets: ["latin"],   variable: "--font-syncopate" });export const metadata: Metadata = {  title: "MADYA | Tesisat Mühendisliğinin Geleceği",  description: "Akışkan mekaniği ve ileri tesisat çözümlerinde yeni nesil dijital platform.",};export default function RootLayout({  children,}: {  children: React.ReactNode;}) {  return (    <html lang="tr">      <body className={`${inter.variable} ${syncopate.variable} antialiased`}>        <ThemeProvider>          <Navbar />          <SmoothScroll>            {children}          </SmoothScroll>          <ChatBot />        </ThemeProvider>      </body>    </html>  );}

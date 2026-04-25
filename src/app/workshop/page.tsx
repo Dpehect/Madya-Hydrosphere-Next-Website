@@ -14,38 +14,29 @@ import Lenis from "@studio-freight/lenis";
 import { Settings, Cpu, Droplets, Activity, Share2, ShieldCheck, Crosshair, Zap, Layers, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import dynamic from "next/dynamic";
-
-// Dynamic imports for the heavy hitters
 const FlowField = dynamic(() => import("@/components/visuals/FlowField"), { ssr: false });
 const NeuralMap = dynamic(() => import("@/components/visuals/NeuralMap"), { ssr: false });
-
-// --- GLOBAL STATE (Zustand) ---
 interface WorkshopState {
   progress: number;
   activeSection: number;
   setProgress: (p: number) => void;
   setActiveSection: (s: number) => void;
 }
-
 const useWorkshopStore = create<WorkshopState>((set) => ({
   progress: 0,
   activeSection: 0,
   setProgress: (p) => set({ progress: p }),
   setActiveSection: (s) => set({ activeSection: s }),
 }));
-
-// --- 3D CINEMATIC OBJECT ---
 const CinematicObject = () => {
   const mesh = useRef<THREE.Mesh>(null!);
   const { progress, activeSection } = useWorkshopStore();
-
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
     mesh.current.rotation.y = t * 0.5 + progress * 5;
     mesh.current.rotation.z = Math.sin(t) * 0.2;
     mesh.current.scale.setScalar(1 + Math.sin(t * 2) * 0.1 + (activeSection === 2 ? 0.2 : 0));
   });
-
   return (
     <group>
       <mesh ref={mesh}>
@@ -53,7 +44,6 @@ const CinematicObject = () => {
         {activeSection === 1 && <torusKnotGeometry args={[1, 0.3, 64, 16]} />}
         {activeSection === 2 && <boxGeometry args={[2, 2, 2, 4, 4, 4]} />}
         {activeSection === 3 && <sphereGeometry args={[1.5, 32, 32]} />}
-        
         <meshStandardMaterial 
           color={activeSection === 2 ? "#ff7300" : "#00f3ff"} 
           metalness={0.5}
@@ -65,27 +55,21 @@ const CinematicObject = () => {
     </group>
   );
 };
-
-// --- MAIN PAGE ---
 export default function WorkshopPage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { setActiveSection, setProgress, activeSection } = useWorkshopStore();
-
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });
-
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);
-
     gsap.registerPlugin(ScrollTrigger);
     const sections = gsap.utils.toArray(".workshop-section");
-    
     sections.forEach((section: any, i) => {
       ScrollTrigger.create({
         trigger: section,
@@ -98,33 +82,26 @@ export default function WorkshopPage() {
         }
       });
     });
-
     return () => {
       lenis.destroy();
       ScrollTrigger.getAll().forEach(t => t.kill());
     };
   }, [activeSection, setActiveSection, setProgress]);
-
   const steps = [
     { title: "AKIŞ ANALİZİ", icon: Droplets, desc: "Sıvı dinamiğinin siber-mekanik simülasyonu. Musluktan şebekeye kadar olan yolculuğun siber-fiziksel iz düşümü." },
     { title: "MOLEKÜLER SENTEZ", icon: Layers, desc: "Nano-kaplama ve atomik düzeyde yüzey koruması. P5.js tabanlı moleküler akış alanları ile optimize edilmiş doku." },
     { title: "STRES MATRİSİ", icon: Activity, desc: "80 Bar+ basınç altında malzeme yorulma testi. Shader tabanlı distorsiyon analizi ile kritik eşik kontrolü." },
     { title: "NÖRAL SENKRON", icon: Share2, desc: "MAZ çekirdeği ile tam otonom entegrasyon. React Flow mimarisi üzerinden merkezi sinir ağı yönetimi." },
   ];
-
   return (
     <main ref={containerRef} className="bg-black text-white overflow-x-hidden selection:bg-cyber-blue selection:text-black">
-      
-      {/* BACKGROUND LAYERS */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-cyber-blue/10" />
         <FlowField />
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10" />
       </div>
-
-      {/* 3D VIEWPORT (Simplified for stability) */}
       <div className="fixed inset-0 w-full h-full z-10 pointer-events-none overflow-hidden">
-        <div className="absolute inset-0 bg-black/20 z-10" /> {/* Subtle overlay for contrast */}
+        <div className="absolute inset-0 bg-black/20 z-10" /> 
         <Canvas gl={{ antialias: false }}>
           <PerspectiveCamera makeDefault position={[0, 0, 8]} />
           <ambientLight intensity={0.5} />
@@ -134,8 +111,6 @@ export default function WorkshopPage() {
           </Float>
         </Canvas>
       </div>
-
-      {/* CONTENT OVERLAY */}
       <div className="relative z-30">
         <section className="h-screen flex flex-col items-center justify-center text-center px-6 pointer-events-none">
            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
@@ -159,7 +134,6 @@ export default function WorkshopPage() {
               <div className="w-px h-12 bg-gradient-to-b from-cyber-blue to-transparent" />
            </motion.div>
         </section>
-
         {steps.map((step, i) => (
           <section key={i} className="workshop-section min-h-screen flex items-center px-6 md:px-20 lg:px-40 py-40">
              <div className={cn(
@@ -175,13 +149,10 @@ export default function WorkshopPage() {
                       <h2 className="text-4xl md:text-6xl font-bold font-syncopate text-white uppercase tracking-tighter">{step.title}</h2>
                    </div>
                 </div>
-                
                 <p className="text-neutral-400 font-mono text-sm md:text-lg leading-relaxed">
                    {step.desc}
                 </p>
-
                 {activeSection === 3 && <NeuralMap />}
-
                 <div className="grid grid-cols-2 gap-6 pt-10 border-t border-white/5">
                    <div className="space-y-1">
                       <span className="block text-[8px] text-neutral-600 uppercase font-mono tracking-widest">Hata Payı</span>
@@ -192,7 +163,6 @@ export default function WorkshopPage() {
                       <span className="text-xl font-bold text-cyber-blue font-syncopate">2.4ms</span>
                    </div>
                 </div>
-
                 <motion.button 
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -203,7 +173,6 @@ export default function WorkshopPage() {
              </div>
           </section>
         ))}
-
         <section className="min-h-screen flex items-center justify-center px-6">
            <div className="max-w-[1200px] w-full grid grid-cols-1 md:grid-cols-3 gap-12">
               {[

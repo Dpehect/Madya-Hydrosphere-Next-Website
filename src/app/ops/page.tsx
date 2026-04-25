@@ -3,17 +3,14 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Activity, Shield, Cpu, Zap, Droplets, HardDrive, Terminal, Server, Globe, ArrowUpRight, BarChart3, AlertTriangle, Layers, Radio, Crosshair } from "lucide-react";
 import { cn } from "@/lib/utils";
-
 const dataStream = [
   { label: "AKIŞ HIZI", value: "1.4m/s", trend: "+2%" },
   { label: "SİSTEM YÜKÜ", value: "%84", trend: "-1%" },
   { label: "VERİ PAKETİ", value: "204kb", trend: "0%" },
 ];
-
 export default function OperationsPage() {
   const [activeSector, setActiveSector] = useState(0);
   const [logs, setLogs] = useState<string[]>([]);
-
   useEffect(() => {
     const messages = [
       "Sinyal güçlendirildi: Bölge 4",
@@ -27,15 +24,10 @@ export default function OperationsPage() {
     }, 3000);
     return () => clearInterval(interval);
   }, []);
-
   return (
     <main className="min-h-screen bg-black pt-32 pb-20 px-6 overflow-hidden relative">
-      {/* Cinematic Background Scanlines */}
       <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_50%,rgba(0,243,255,0.02)_50%)] bg-[size:100%_4px] pointer-events-none z-10" />
-      
       <div className="container mx-auto max-w-[1400px] relative z-20">
-        
-        {/* TOP HUD */}
         <div className="flex flex-col lg:flex-row gap-6 mb-10 items-start">
            <div className="w-full glass border border-cyber-blue/20 p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] bg-cyber-blue/5 flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="space-y-1 text-center md:text-left">
@@ -52,11 +44,7 @@ export default function OperationsPage() {
               </div>
            </div>
         </div>
-
-        {/* MAIN GRID */}
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-           
-           {/* Column 1: Network Topology */}
            <div className="space-y-6">
               <div className="p-6 glass border border-white/5 rounded-3xl space-y-6">
                  <div className="flex items-center gap-2">
@@ -73,7 +61,6 @@ export default function OperationsPage() {
                     ))}
                  </div>
               </div>
-
               <div className="p-6 glass border border-white/5 rounded-3xl bg-gradient-to-b from-white/5 to-transparent">
                  <div className="flex items-center gap-2 mb-6">
                     <Radio className="w-4 h-4 text-cyber-green" />
@@ -91,12 +78,9 @@ export default function OperationsPage() {
                  </div>
               </div>
            </div>
-
-           {/* Column 2 & 3: Visual Intelligence Core */}
            <div className="lg:col-span-2 space-y-6">
               <div className="relative glass border border-white/10 rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 h-[400px] md:h-[550px] overflow-hidden group">
                  <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(0,243,255,0.05),transparent_70%)]" />
-                 
                  <div className="relative z-10 flex flex-col h-full justify-between">
                     <div className="flex justify-between items-start">
                        <div className="flex items-center gap-2">
@@ -105,7 +89,6 @@ export default function OperationsPage() {
                        </div>
                        <button className="px-3 py-1.5 md:px-4 md:py-2 border border-white/10 rounded-xl text-[7px] md:text-[8px] font-mono text-neutral-500 hover:text-white transition-all uppercase">Tam Ekran</button>
                     </div>
-
                     <div className="flex items-center justify-center flex-1">
                        <div className="relative">
                           <motion.div 
@@ -124,7 +107,6 @@ export default function OperationsPage() {
                           </div>
                        </div>
                     </div>
-
                     <div className="grid grid-cols-2 gap-4">
                        <div className="p-3 md:p-4 bg-white/5 rounded-2xl border border-white/5">
                           <span className="block text-[7px] md:text-[8px] font-mono text-neutral-500 uppercase mb-2">Kapasite</span>
@@ -148,8 +130,6 @@ export default function OperationsPage() {
                  </div>
               </div>
            </div>
-
-           {/* Column 4: Intelligence Logs & Alerts */}
            <div className="space-y-6">
               <div className="p-8 glass border border-white/5 rounded-[2.5rem] bg-black/40 h-full flex flex-col">
                  <div className="flex items-center justify-between mb-8 border-b border-white/10 pb-4">
@@ -185,7 +165,6 @@ export default function OperationsPage() {
                  </div>
               </div>
            </div>
-
         </div>
       </div>
     </main>

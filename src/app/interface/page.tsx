@@ -3,16 +3,13 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, Terminal, Shield, Cpu, MessageSquare, User, Mail, Crosshair, Activity } from "lucide-react";
 import { cn } from "@/lib/utils";
-
 export default function InterfacePage() {
   const [msg, setMsg] = useState("");
   const [isSending, setIsSending] = useState(false);
   const [status, setStatus] = useState<string[]>([]);
-
   const handleSend = () => {
     setIsSending(true);
     setStatus(["BAĞLANTI_KURULUYOR...", "VERİ_PAKETLERİ_HAZIRLANIYOR...", "ŞİFRELEME: AES-256..."]);
-    
     setTimeout(() => {
       setStatus(prev => [...prev, "SİNYAL_GÖNDERİLDİ: BAŞARILI"]);
       setTimeout(() => {
@@ -22,20 +19,14 @@ export default function InterfacePage() {
       }, 2000);
     }, 2000);
   };
-
   return (
     <main className="min-h-screen bg-black flex items-center justify-center pt-32 pb-20 px-6 relative overflow-hidden selection:bg-cyber-blue selection:text-black">
-      
-      {/* Background Animated Elements */}
       <div className="absolute inset-0 z-0 opacity-20">
          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyber-blue/10 rounded-full blur-[120px] animate-pulse" />
          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyber-orange/10 rounded-full blur-[120px] animate-pulse delay-1000" />
       </div>
-
       <div className="container mx-auto max-w-[1400px] relative z-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
-           
-           {/* LEFT: STATUS HUD */}
            <div className="lg:col-span-4 space-y-6 flex flex-col">
               <div className="glass p-10 rounded-[3rem] border border-white/5 bg-black/40 flex-1 space-y-10">
                  <div className="space-y-4">
@@ -47,7 +38,6 @@ export default function InterfacePage() {
                        DİJİTAL <br /> <span className="text-outline text-transparent opacity-30">ARAYÜZ</span>
                     </h1>
                  </div>
-
                  <div className="space-y-6">
                     {[
                       { label: "Protokol", val: "SİBER-AKIŞ v4", icon: Shield },
@@ -65,7 +55,6 @@ export default function InterfacePage() {
                       </div>
                     ))}
                  </div>
-
                  <div className="p-6 rounded-2xl bg-white/5 border border-white/5 space-y-4">
                     <span className="block text-[8px] text-neutral-500 uppercase font-mono">Terminal_Log</span>
                     <div className="space-y-2 max-h-40 overflow-y-auto no-scrollbar">
@@ -87,8 +76,6 @@ export default function InterfacePage() {
                  </div>
               </div>
            </div>
-
-           {/* RIGHT: INTERACTIVE FORM */}
            <div className="lg:col-span-8">
               <div className="glass p-12 md:p-20 rounded-[4rem] border border-white/5 bg-black/60 backdrop-blur-3xl h-full flex flex-col justify-between">
                  <div className="space-y-16">
@@ -114,7 +101,6 @@ export default function InterfacePage() {
                           />
                        </div>
                     </div>
-
                     <div className="space-y-4 group">
                        <label className="flex items-center gap-3 text-[10px] font-mono text-neutral-500 uppercase tracking-widest">
                           <MessageSquare className="w-3 h-3 text-cyber-blue" /> Proje_Veri_Seti
@@ -127,7 +113,6 @@ export default function InterfacePage() {
                        />
                     </div>
                  </div>
-
                  <div className="pt-20 flex flex-col md:flex-row items-center justify-between gap-10">
                     <div className="flex items-center gap-4">
                        <Crosshair className="w-6 h-6 text-cyber-blue animate-spin-slow" />
@@ -135,7 +120,6 @@ export default function InterfacePage() {
                           TÜM VERİLER AES-256 SİBER-PROTOKOLÜ İLE ŞİFRELENEREK MERKEZİ ÜSSE İLETİLİR.
                        </p>
                     </div>
-
                     <motion.button 
                       onClick={handleSend}
                       disabled={isSending || !msg}
@@ -152,11 +136,8 @@ export default function InterfacePage() {
                  </div>
               </div>
            </div>
-
         </div>
       </div>
-
-      {/* Cinematic Grain Overlay */}
       <div className="absolute inset-0 z-10 pointer-events-none opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay" />
     </main>
   );
