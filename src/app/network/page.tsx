@@ -244,8 +244,7 @@ export default function NetworkPage() {
                        </p>
                     </div>
 
-                    </div>
-                 </div>
+                  </div>
                </div>
             </motion.div>
           </>
