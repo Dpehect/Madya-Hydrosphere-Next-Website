@@ -371,6 +371,7 @@ const HackathonUI = () => {
         </p>
       </div>
     </div>
+  </div>
   );
 };
 export default function HomePage() {
