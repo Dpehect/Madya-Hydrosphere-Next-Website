@@ -159,10 +159,7 @@ export default function NetworkPage() {
                           </div>
                        </div>
                     </div>
-                    <button className="w-full py-5 bg-cyber-blue text-black font-bold text-xs rounded-2xl hover:bg-white transition-all uppercase tracking-[0.3em] shadow-[0_20px_50px_rgba(0,243,255,0.2)]">
-                       ANALİZ RAPORU
-                    </button>
-                 </motion.div>
+                  </motion.div>
               </AnimatePresence>
            </div>
         </div>
@@ -247,9 +244,7 @@ export default function NetworkPage() {
                        </p>
                     </div>
 
-                    <button className="w-full py-5 bg-cyber-blue text-black font-bold text-[10px] rounded-2xl uppercase tracking-[0.3em]">
-                       DETAYLI ANALİZ RAPORU
-                    </button>
+                    </div>
                  </div>
                </div>
             </motion.div>
