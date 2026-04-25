@@ -31,7 +31,7 @@ export default function NeuralMap() {
         style={{ background: 'transparent' }}
         proOptions={{ hideAttribution: true }}
       >
-        <Background color="#00f3ff" gap={20} size={1} opacity={0.05} />
+        <Background color="#00f3ff" gap={20} size={1} />
       </ReactFlow>
     </motion.div>
   );
