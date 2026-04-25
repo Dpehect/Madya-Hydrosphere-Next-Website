@@ -102,11 +102,11 @@ const FluidSchema = () => {
           />
         ))}
         {[
-          { x: 150, y: 150, label: "HUB-01", icon: <Cpu className="w-4 h-4" /> },
-          { x: 50, y: 150, label: "IN-01", icon: <Droplets className="w-4 h-4" /> },
-          { x: 350, y: 150, label: "OUT-01", icon: <ShieldCheck className="w-4 h-4" /> },
-          { x: 150, y: 50, label: "SNS-A", icon: <Settings className="w-4 h-4" /> },
-          { x: 250, y: 250, label: "SNS-B", icon: <Activity className="w-4 h-4" /> }
+          { x: 150, y: 150, label: "HUB-01", Icon: Cpu },
+          { x: 50, y: 150, label: "IN-01", Icon: Droplets },
+          { x: 350, y: 150, label: "OUT-01", Icon: ShieldCheck },
+          { x: 150, y: 50, label: "SNS-A", Icon: Settings },
+          { x: 250, y: 250, label: "SNS-B", Icon: Activity }
         ].map((node, i) => (
           <motion.g 
             key={i} 
@@ -118,7 +118,7 @@ const FluidSchema = () => {
             <circle cx={node.x} cy={node.y} r="12" fill="#00f3ff" fillOpacity="0.05" />
             <foreignObject x={node.x - 8} y={node.y - 8} width="16" height="16">
               <div className="text-cyber-blue flex items-center justify-center h-full">
-                {React.cloneElement(node.icon as React.ReactElement<any>, { size: 10 })}
+                <node.Icon size={10} />
               </div>
             </foreignObject>
             <text x={node.x} y={node.y + 25} textAnchor="middle" fill="#00f3ff" className="text-[6px] font-mono tracking-widest uppercase opacity-60">
