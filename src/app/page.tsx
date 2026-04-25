@@ -159,11 +159,14 @@ const QuantumCore = () => {
       offset: Math.random() * Math.PI * 2,
     }));
   }, []);
+  const { viewport } = useThree();
+  const isMobile = viewport.width < 10;
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
     group.current.rotation.z = t * 0.15; 
     group.current.rotation.y = t * 0.08;
-    const s = 1 + Math.sin(t * 2) * 0.05;
+    const baseScale = isMobile ? 0.6 : 1;
+    const s = baseScale + Math.sin(t * 2) * 0.05;
     group.current.scale.set(s, s, s);
   });
   return (
@@ -213,7 +216,7 @@ const HackathonUI = () => {
   return (
     <div className="relative min-h-screen z-20 pointer-events-none">
       <div className="h-screen flex flex-col items-center justify-center py-20 px-10">
-        <div className="absolute top-10 left-10 space-y-1 opacity-40">
+        <div className="absolute top-10 left-10 space-y-1 opacity-40 hidden md:block">
            <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-cyber-blue animate-pulse" />
               <span className="text-[8px] font-mono text-white uppercase tracking-[0.5em]">Neural_Sync: Online</span>
@@ -225,8 +228,8 @@ const HackathonUI = () => {
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }} 
-            className="text-7xl md:text-[14rem] font-bold font-syncopate tracking-[0.15em] leading-none text-white drop-shadow-[0_0_80px_rgba(0,243,255,0.4)] relative z-10"
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="text-5xl sm:text-7xl md:text-[10rem] lg:text-[14rem] font-bold font-syncopate tracking-[0.1em] md:tracking-[0.15em] leading-none text-white drop-shadow-[0_0_80px_rgba(0,243,255,0.4)] relative z-10"
           >
             <TextScramble text="MADYA" />
           </motion.h1>
@@ -242,7 +245,7 @@ const HackathonUI = () => {
             <div className="w-px h-24 bg-gradient-to-b from-cyber-blue to-transparent" />
           </motion.div>
         </div>
-        <div className="absolute bottom-10 right-10 flex flex-col items-end gap-2 opacity-30 font-mono text-[8px] uppercase tracking-widest">
+        <div className="absolute bottom-10 right-10 flex flex-col items-end gap-2 opacity-30 font-mono text-[8px] uppercase tracking-widest hidden md:flex">
            <span>Lat: 39.9334° N</span>
            <span>Lon: 32.8597° E</span>
            <span className="text-cyber-blue">Active_Flow: 100%</span>
@@ -264,10 +267,10 @@ const HackathonUI = () => {
                 className="lg:w-1/2 space-y-10"
               >
                 <span className="text-cyber-blue font-mono text-xs tracking-[0.5em] uppercase">01 / Mühendislik Vizyonu</span>
-                <h2 className="text-5xl md:text-8xl font-bold font-syncopate text-white leading-none uppercase tracking-tighter">
+                <h2 className="text-4xl sm:text-5xl md:text-8xl font-bold font-syncopate text-white leading-none uppercase tracking-tighter">
                   AKIŞKAN <br /> <span className="text-outline text-transparent opacity-30">ZEKA</span>
                 </h2>
-                <p className="text-neutral-400 font-mono text-sm leading-relaxed uppercase tracking-widest max-w-xl">
+                <p className="text-neutral-400 font-mono text-[10px] md:text-sm leading-relaxed uppercase tracking-widest max-w-xl">
                   Geleneksel tesisat kavramını siber-fiziksel sistemlerle yeniden tanımlıyoruz. Madya, suyun yaşam alanlarınızdaki her milimetresini yapay zeka ile yönetir.
                 </p>
                 <div className="flex gap-10">
@@ -286,7 +289,7 @@ const HackathonUI = () => {
                 whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
                 viewport={{ once: true }}
                 transition={{ type: "spring", stiffness: 100, damping: 20 }}
-                className="lg:w-1/2 w-full aspect-video glass rounded-[4rem] border border-white/10 relative overflow-hidden perspective-1000"
+                className="lg:w-1/2 w-full aspect-video glass rounded-[2rem] md:rounded-[4rem] border border-white/10 relative overflow-hidden perspective-1000"
               >
                  <div className="absolute inset-0 bg-gradient-to-br from-cyber-blue/10 to-transparent" />
                  <FluidSchema />
@@ -335,7 +338,7 @@ const HackathonUI = () => {
                     damping: 30 
                   }}
                   viewport={{ once: true }}
-                  className="glass p-12 rounded-[3rem] border border-white/5 space-y-6 group cursor-pointer"
+                  className="glass p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] border border-white/5 space-y-6 group cursor-pointer"
                 >
                   <span className="text-5xl font-bold font-syncopate text-white/10 group-hover:text-cyber-blue/20 transition-colors">{item.step}</span>
                   <h4 className="text-xl font-bold font-syncopate text-white">{item.title}</h4>
@@ -364,8 +367,8 @@ const HackathonUI = () => {
       </div>
       <div className="fixed inset-0 z-10 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/80" />
-      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-50 opacity-50">
-        <p className="text-[8px] font-mono text-cyber-blue uppercase tracking-[0.5em] whitespace-nowrap">
+      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-50 opacity-50 px-6 w-full text-center">
+        <p className="text-[6px] md:text-[8px] font-mono text-cyber-blue uppercase tracking-[0.3em] md:tracking-[0.5em]">
           Bu proje SoftBridge Solutions ürünüdür
         </p>
       </div>
