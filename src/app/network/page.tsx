@@ -22,6 +22,14 @@ const regions = [
 ];
 export default function NetworkPage() {
   const [active, setActive] = useState(regions[0]);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleSelect = (reg: typeof regions[0]) => {
+    setActive(reg);
+    if (window.innerWidth < 1024) {
+      setShowModal(true);
+    }
+  };
   return (
     <main className="min-h-screen bg-black pt-32 pb-20 px-4 md:px-10 lg:px-20 overflow-hidden relative selection:bg-cyber-blue selection:text-black">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,#00f3ff05,transparent_70%)] pointer-events-none" />
@@ -38,24 +46,24 @@ export default function NetworkPage() {
                     <span className="text-cyber-blue">MATRİS</span>
                  </h1>
               </div>
-              <div className="glass border border-white/5 p-8 rounded-[2.5rem] bg-black/40 space-y-4">
-                 <span className="text-[8px] font-mono text-neutral-600 uppercase tracking-widest block mb-4">Bölge Seçimi</span>
-                 <div className="space-y-2">
-                    {regions.map((reg) => (
-                      <button 
-                        key={reg.id} 
-                        onClick={() => setActive(reg)}
-                        className={cn(
-                          "w-full flex items-center justify-between p-4 rounded-2xl transition-all group",
-                          active.id === reg.id ? "bg-cyber-blue text-black font-bold scale-[1.05]" : "hover:bg-white/5 text-neutral-500"
-                        )}
-                      >
-                         <span className="text-[10px] font-mono tracking-widest">{reg.name}</span>
-                         <ChevronRight className={cn("w-4 h-4", active.id === reg.id ? "rotate-90" : "group-hover:translate-x-1")} />
-                      </button>
-                    ))}
-                 </div>
-              </div>
+               <div className="glass border border-white/5 p-6 md:p-8 rounded-[2.5rem] bg-black/40 space-y-4">
+                  <span className="text-[8px] font-mono text-neutral-600 uppercase tracking-widest block mb-4">Bölge Seçimi</span>
+                  <div className="space-y-2 max-h-[300px] lg:max-h-none overflow-y-auto no-scrollbar pr-2">
+                     {regions.map((reg) => (
+                       <button 
+                         key={reg.id} 
+                         onClick={() => handleSelect(reg)}
+                         className={cn(
+                           "w-full flex items-center justify-between p-4 rounded-2xl transition-all group",
+                           active.id === reg.id ? "bg-cyber-blue text-black font-bold scale-[1.05]" : "hover:bg-white/5 text-neutral-500"
+                         )}
+                       >
+                          <span className="text-[10px] font-mono tracking-widest">{reg.name}</span>
+                          <ChevronRight className={cn("w-4 h-4", active.id === reg.id ? "rotate-90" : "group-hover:translate-x-1")} />
+                       </button>
+                     ))}
+                  </div>
+               </div>
               <div className="grid grid-cols-1 gap-4">
                  <div className="p-6 glass border border-white/5 rounded-3xl flex items-center gap-6">
                     <Layers className="w-5 h-5 text-cyber-blue" />
@@ -94,8 +102,8 @@ export default function NetworkPage() {
                           <motion.div
                             key={reg.id}
                             className="absolute z-20 cursor-pointer"
-                            style={{ left: `${reg.x}%`, top: `${reg.y}%` }}
-                            onClick={() => setActive(reg)}
+                             style={{ left: `${reg.x}%`, top: `${reg.y}%` }}
+                             onClick={() => handleSelect(reg)}
                           >
                              <motion.div 
                                animate={{ height: [30, 80, 30], opacity: [0.1, 0.4, 0.1] }}
@@ -176,6 +184,70 @@ export default function NetworkPage() {
            </div>
         </div>
       </div>
+
+      <AnimatePresence>
+        {showModal && (
+          <>
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowModal(false)}
+              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[400] lg:hidden"
+            />
+            <motion.div 
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed bottom-0 left-0 right-0 z-[401] glass border-t border-cyber-blue/30 rounded-t-[3rem] p-8 lg:hidden bg-black/90 backdrop-blur-3xl shadow-[0_-20px_50px_rgba(0,243,255,0.15)]"
+            >
+               <div className="w-12 h-1.5 bg-white/10 rounded-full mx-auto mb-8" />
+               <div className="space-y-8">
+                  <div className="flex items-center justify-between">
+                     <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-2xl bg-cyber-blue/10 flex items-center justify-center border border-cyber-blue/20">
+                           <MapIcon className="w-6 h-6 text-cyber-blue" />
+                        </div>
+                        <div>
+                           <h3 className="text-2xl font-bold font-syncopate text-white uppercase">{active.name}</h3>
+                           <p className="text-[8px] text-neutral-500 font-mono uppercase tracking-[0.4em]">KOMUTA MERKEZİ</p>
+                        </div>
+                     </div>
+                     <button 
+                       onClick={() => setShowModal(false)}
+                       className="p-3 bg-white/5 rounded-full border border-white/10"
+                     >
+                        <ChevronRight className="w-5 h-5 text-white rotate-90" />
+                     </button>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                     <div className="p-5 bg-white/5 rounded-2xl border border-white/5">
+                        <span className="block text-[7px] font-mono text-neutral-500 uppercase mb-2">Saha Trafiği</span>
+                        <span className="text-xl font-bold text-white font-mono">{active.load}</span>
+                     </div>
+                     <div className="p-5 bg-white/5 rounded-2xl border border-white/5">
+                        <span className="block text-[7px] font-mono text-neutral-500 uppercase mb-2">Aktif Ekip</span>
+                        <span className="text-xl font-bold text-white font-mono">{active.nodes}</span>
+                     </div>
+                  </div>
+
+                  <div className="p-6 bg-cyber-blue/5 border border-cyber-blue/20 rounded-2xl flex items-center gap-4">
+                     <Activity className="w-5 h-5 text-cyber-blue animate-pulse" />
+                     <p className="text-[9px] font-mono text-neutral-400 uppercase leading-relaxed">
+                        BÖLGE SINYALİ STABIL. VERI PAKETLERI MAZ-SYNC PROTOKOLÜ ILE AKTARILIYOR.
+                     </p>
+                  </div>
+
+                  <button className="w-full py-5 bg-cyber-blue text-black font-bold text-[10px] rounded-2xl uppercase tracking-[0.3em]">
+                     DETAYLI ANALİZ RAPORU
+                  </button>
+               </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </main>
   );
 }
