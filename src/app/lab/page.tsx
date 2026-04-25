@@ -66,10 +66,10 @@ export default function LabPage() {
           </div>
           <div className="lg:col-span-6 space-y-8 lg:space-y-10">
             <header className="text-center space-y-4">
-               <h2 className="text-3xl md:text-5xl lg:text-7xl font-bold font-syncopate text-white uppercase tracking-tighter leading-tight md:leading-none">
+               <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold font-syncopate text-white uppercase tracking-tighter leading-tight md:leading-none">
                  AR GE <br /> <span className="text-cyber-blue">LABORATUVARI</span>
                </h2>
-               <p className="text-neutral-500 font-mono text-[10px] md:text-xs lg:text-sm max-w-xl mx-auto leading-relaxed">
+               <p className="text-neutral-500 font-mono text-[9px] md:text-xs lg:text-sm max-w-xl mx-auto leading-relaxed">
                  Madya'nın fütüristik test merkezi; her bir akışkan bileşenini atomik düzeyde analiz ederek siber-tesisatın geleceğini inşa ediyor.
                </p>
             </header>

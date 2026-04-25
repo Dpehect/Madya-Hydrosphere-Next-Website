@@ -34,7 +34,7 @@ export default function InterfacePage() {
                        <div className="w-2 h-2 bg-cyber-blue rounded-full animate-ping" />
                        <span className="text-[10px] font-mono text-cyber-blue tracking-[0.4em] uppercase">Sinyal Merkezi v5.2</span>
                     </div>
-                    <h1 className="text-5xl font-bold font-syncopate text-white uppercase tracking-tighter leading-none">
+                    <h1 className="text-4xl md:text-5xl font-bold font-syncopate text-white uppercase tracking-tighter leading-none">
                        DİJİTAL <br /> <span className="text-outline text-transparent opacity-30">ARAYÜZ</span>
                     </h1>
                  </div>
@@ -77,7 +77,7 @@ export default function InterfacePage() {
               </div>
            </div>
            <div className="lg:col-span-8">
-              <div className="glass p-12 md:p-20 rounded-[4rem] border border-white/5 bg-black/60 backdrop-blur-3xl h-full flex flex-col justify-between">
+              <div className="glass p-8 md:p-20 rounded-[2.5rem] md:rounded-[4rem] border border-white/5 bg-black/60 backdrop-blur-3xl h-full flex flex-col justify-between">
                  <div className="space-y-16">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                        <div className="space-y-4 group">

@@ -34,11 +34,11 @@ export default function OperationsPage() {
                  <span className="text-[9px] md:text-[10px] font-mono text-cyber-blue tracking-[0.5em] uppercase">OPERASYONEL DURUM</span>
                  <h2 className="text-3xl md:text-4xl font-bold font-syncopate text-white uppercase tracking-tighter">SİSTEM <span className="text-cyber-blue underline underline-offset-8">NOMİNAL</span></h2>
               </div>
-              <div className="flex gap-6 md:gap-10">
+              <div className="flex flex-wrap justify-center md:justify-end gap-4 md:gap-10">
                  {dataStream.map((item, i) => (
                    <div key={i} className="text-center md:text-right">
                       <span className="block text-[7px] md:text-[8px] font-mono text-neutral-500 uppercase">{item.label}</span>
-                      <span className="text-lg md:text-xl font-bold text-white font-mono">{item.value}</span>
+                      <span className="text-base md:text-xl font-bold text-white font-mono">{item.value}</span>
                    </div>
                  ))}
               </div>

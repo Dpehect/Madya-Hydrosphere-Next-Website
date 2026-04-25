@@ -40,7 +40,7 @@ export default function VisionPage() {
              <span className="text-[8px] md:text-[10px] font-mono text-white tracking-[0.3em] uppercase">GELECEK PROJEKSİYONU</span>
           </motion.div>
           <h2 className="text-4xl md:text-7xl xl:text-8xl font-bold font-syncopate text-white leading-tight tracking-tighter uppercase">VİZYON <br /> <span className="text-cyber-blue">2030</span></h2>
-          <p className="text-neutral-500 font-mono text-[10px] md:text-sm lg:text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-neutral-500 font-mono text-[9px] md:text-sm lg:text-lg max-w-2xl mx-auto leading-relaxed">
             Sıradan bir tesisat firması olmanın ötesinde, akışkanlar mekaniğinin dijital ve fiziksel sınırlarını zorlayan bir teknoloji öncüsü olma yolunda ilerliyoruz.
           </p>
         </div>
@@ -53,7 +53,7 @@ export default function VisionPage() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.2 }}
               className={cn(
-                "p-8 md:p-10 glass border border-white/5 rounded-[2.5rem] md:rounded-[3rem] relative group overflow-hidden transition-all hover:border-white/20 bg-gradient-to-br",
+                "p-8 md:p-10 glass border border-white/5 rounded-[2rem] md:rounded-[3rem] relative group overflow-hidden transition-all hover:border-white/20 bg-gradient-to-br",
                 v.color
               )}
             >
@@ -72,7 +72,7 @@ export default function VisionPage() {
             </motion.div>
           ))}
         </div>
-        <div className="mt-20 md:mt-32 p-8 md:p-12 glass border border-white/5 rounded-[2.5rem] md:rounded-[4rem] relative overflow-hidden flex flex-col md:flex-row items-center gap-8 md:gap-12">
+        <div className="mt-20 md:mt-32 p-8 md:p-12 glass border border-white/5 rounded-[2rem] md:rounded-[4rem] relative overflow-hidden flex flex-col md:flex-row items-center gap-8 md:gap-12">
            <div className="flex-1 space-y-4 md:space-y-6">
               <div className="flex items-center gap-3">
                  <Shield className="w-5 h-5 md:w-6 md:h-6 text-cyber-green" />

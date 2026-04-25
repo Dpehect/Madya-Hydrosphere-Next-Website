@@ -118,10 +118,10 @@ export default function WorkshopPage() {
                  <Settings className="w-5 h-5 text-cyber-blue animate-spin-slow" />
                  <span className="text-xs font-mono text-cyber-blue tracking-[0.5em] uppercase drop-shadow-lg">Madya Forge v2.5</span>
               </div>
-              <h1 className="text-7xl md:text-[11rem] font-bold font-syncopate tracking-tighter leading-none text-white drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
+              <h1 className="text-5xl md:text-[11rem] font-bold font-syncopate tracking-tighter leading-none text-white drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
                  SİBER <br /> <span className="text-outline text-transparent opacity-50">FORGE</span>
               </h1>
-              <p className="text-neutral-300 font-mono text-sm max-w-xl mx-auto uppercase tracking-widest leading-relaxed drop-shadow-md">
+              <p className="text-neutral-300 font-mono text-[10px] md:text-sm max-w-xl mx-auto uppercase tracking-widest leading-relaxed drop-shadow-md">
                  GSAP, R3F ve P5.js ile optimize edilmiş akışkan mühendislik deneyimi.
               </p>
            </motion.div>
@@ -135,9 +135,9 @@ export default function WorkshopPage() {
            </motion.div>
         </section>
         {steps.map((step, i) => (
-          <section key={i} className="workshop-section min-h-screen flex items-center px-6 md:px-20 lg:px-40 py-40">
+          <section key={i} className="workshop-section min-h-screen flex items-center px-6 md:px-20 lg:px-40 py-20 md:py-40">
              <div className={cn(
-               "max-w-2xl space-y-8 glass p-12 md:p-16 rounded-[4rem] border border-white/5 bg-black/60 backdrop-blur-3xl transition-all duration-1000 ease-out",
+               "max-w-2xl space-y-8 glass p-8 md:p-16 rounded-[2.5rem] md:rounded-[4rem] border border-white/5 bg-black/60 backdrop-blur-3xl transition-all duration-1000 ease-out",
                activeSection === i ? "opacity-100 translate-x-0 scale-100" : "opacity-0 -translate-x-40 scale-90"
              )}>
                 <div className="flex items-center gap-6">

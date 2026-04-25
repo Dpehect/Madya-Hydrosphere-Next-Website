@@ -158,7 +158,7 @@ export default function NetworkPage() {
               </AnimatePresence>
            </div>
         </div>
-        <div className="mt-20 flex justify-between items-center glass border border-white/5 p-8 rounded-[3rem] bg-black/60">
+        <div className="mt-10 md:mt-20 flex flex-col sm:flex-row justify-between items-center gap-8 glass border border-white/5 p-6 md:p-8 rounded-[2rem] md:rounded-[3rem] bg-black/60">
            <div className="flex gap-12 font-mono">
               <div>
                  <span className="block text-[8px] text-neutral-500 uppercase">Gecikme</span>

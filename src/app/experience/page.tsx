@@ -92,21 +92,21 @@ export default function ExperiencePage() {
     <main ref={containerRef} className="bg-black overflow-x-hidden">
       <section className="h-screen w-full relative overflow-hidden bg-[radial-gradient(circle_at_50%_50%,#0a1128,black)]">
         <div className="absolute inset-0 pointer-events-none z-30">
-          <div className="absolute top-24 left-0 w-full px-10 flex justify-between items-start pointer-events-auto">
+          <div className="absolute top-24 left-0 w-full px-6 md:px-10 flex flex-col md:flex-row justify-between items-start gap-6 pointer-events-auto">
              <div className="space-y-2">
                 <div className="flex items-center gap-2">
-                   <Settings className="w-4 h-4 text-cyber-blue animate-spin-slow" />
-                   <span className="text-[10px] font-mono text-white tracking-[0.3em] uppercase">AKILLI AKIŞ KONTROL ÜNİTESİ v4.2</span>
+                   <Settings className="w-3 h-3 md:w-4 md:h-4 text-cyber-blue animate-spin-slow" />
+                   <span className="text-[8px] md:text-[10px] font-mono text-white tracking-[0.3em] uppercase">AKILLI AKIŞ KONTROL ÜNİTESİ v4.2</span>
                 </div>
-                <h2 className="text-4xl md:text-6xl font-bold font-syncopate text-white uppercase tracking-tighter">SİSTEM <br /> <span style={{ color: getSystemColor() }}>{systemMode}</span></h2>
+                <h2 className="text-3xl md:text-6xl font-bold font-syncopate text-white uppercase tracking-tighter">SİSTEM <br /> <span style={{ color: getSystemColor() }}>{systemMode}</span></h2>
              </div>
-             <div className="flex gap-4">
+             <div className="flex flex-wrap gap-2 md:gap-4">
                 {["STABİL", "OPTİMİZASYON", "KRİTİK"].map((mode) => (
                   <button 
                     key={mode}
                     onClick={() => setSystemMode(mode as any)}
                     className={cn(
-                      "px-4 py-2 rounded-lg border text-[8px] font-mono transition-all",
+                      "px-3 py-1 md:px-4 md:py-2 rounded-lg border text-[7px] md:text-[8px] font-mono transition-all",
                       systemMode === mode 
                         ? "bg-white text-black border-white" 
                         : "border-white/10 text-white/40 hover:border-white/30"
@@ -117,38 +117,38 @@ export default function ExperiencePage() {
                 ))}
              </div>
           </div>
-          <div className="absolute top-1/2 -translate-y-1/2 left-10 space-y-8 pointer-events-auto">
+          <div className="absolute top-1/2 -translate-y-1/2 left-6 md:left-10 space-y-4 md:space-y-8 pointer-events-auto hidden sm:block">
              <div className="space-y-1">
-                <span className="text-[8px] font-mono text-neutral-600 uppercase">AKIŞ BASINCI</span>
-                <div className="text-2xl font-bold font-syncopate text-white">{systemMode === "KRİTİK" ? "12.8" : "4.2"} <span className="text-[10px] text-neutral-600">BAR</span></div>
+                <span className="text-[7px] md:text-[8px] font-mono text-neutral-600 uppercase">AKIŞ BASINCI</span>
+                <div className="text-lg md:text-2xl font-bold font-syncopate text-white">{systemMode === "KRİTİK" ? "12.8" : "4.2"} <span className="text-[8px] md:text-[10px] text-neutral-600">BAR</span></div>
              </div>
              <div className="space-y-1">
-                <span className="text-[8px] font-mono text-neutral-600 uppercase">VİSKOZİTE</span>
-                <div className="text-2xl font-bold font-syncopate text-white">0.89 <span className="text-[10px] text-neutral-600">mPa.s</span></div>
+                <span className="text-[7px] md:text-[8px] font-mono text-neutral-600 uppercase">VİSKOZİTE</span>
+                <div className="text-lg md:text-2xl font-bold font-syncopate text-white">0.89 <span className="text-[8px] md:text-[10px] text-neutral-600">mPa.s</span></div>
              </div>
              <div className="space-y-1">
-                <span className="text-[8px] font-mono text-neutral-600 uppercase">ENERJİ GERİ KAZANIMI</span>
-                <div className="text-2xl font-bold font-syncopate text-cyber-green">%{systemMode === "OPTİMİZASYON" ? "94" : "82"}</div>
+                <span className="text-[7px] md:text-[8px] font-mono text-neutral-600 uppercase">ENERJİ GERİ KAZANIMI</span>
+                <div className="text-lg md:text-2xl font-bold font-syncopate text-cyber-green">%{systemMode === "OPTİMİZASYON" ? "94" : "82"}</div>
              </div>
           </div>
-          <div className="absolute top-1/2 -translate-y-1/2 right-10 space-y-4 pointer-events-auto text-right">
-             <div className="p-4 glass border border-white/5 rounded-2xl space-y-4 max-w-[200px]">
-                <Activity className="w-5 h-5 text-cyber-blue ml-auto" />
-                <p className="text-[9px] font-mono text-neutral-500 leading-relaxed uppercase">
+          <div className="absolute top-1/2 -translate-y-1/2 right-6 md:right-10 space-y-4 pointer-events-auto text-right hidden sm:block">
+             <div className="p-4 glass border border-white/5 rounded-2xl space-y-4 max-w-[150px] md:max-w-[200px]">
+                <Activity className="w-4 h-4 md:w-5 md:h-5 text-cyber-blue ml-auto" />
+                <p className="text-[8px] md:text-[9px] font-mono text-neutral-500 leading-relaxed uppercase">
                   {milestones[activeYearIndex].year} Yılındaki teknolojik altyapı simüle ediliyor...
                 </p>
-                <div className="text-xs font-bold text-white uppercase tracking-widest">{milestones[activeYearIndex].title}</div>
+                <div className="text-[10px] md:text-xs font-bold text-white uppercase tracking-widest">{milestones[activeYearIndex].title}</div>
              </div>
           </div>
-          <div className="absolute bottom-10 left-10 p-6 glass border border-white/5 rounded-2xl flex items-center gap-6 pointer-events-auto">
+          <div className="absolute bottom-10 left-6 right-6 md:left-10 md:right-auto p-4 md:p-6 glass border border-white/5 rounded-2xl flex flex-col md:flex-row items-center gap-4 md:gap-6 pointer-events-auto">
              <div className="flex items-center gap-2">
-                <Zap className="w-4 h-4 text-cyber-blue" />
-                <span className="text-[10px] font-mono text-white">AKTİF MODÜL: {activeYearIndex + 1}/5</span>
+                <Zap className="w-3 h-3 md:w-4 md:h-4 text-cyber-blue" />
+                <span className="text-[8px] md:text-[10px] font-mono text-white uppercase tracking-widest">AKTİF MODÜL: {activeYearIndex + 1}/5</span>
              </div>
-             <div className="h-4 w-[1px] bg-white/10" />
+             <div className="hidden md:block h-4 w-[1px] bg-white/10" />
              <div className="flex items-center gap-2">
-                <Droplets className="w-4 h-4 text-cyber-blue" />
-                <span className="text-[10px] font-mono text-white uppercase">SIVI SİMÜLASYONU AKTİF</span>
+                <Droplets className="w-3 h-3 md:w-4 md:h-4 text-cyber-blue" />
+                <span className="text-[8px] md:text-[10px] font-mono text-white uppercase tracking-widest">SİSTEM SİNYALİ AKTİF</span>
              </div>
           </div>
         </div>
@@ -184,8 +184,8 @@ export default function ExperiencePage() {
                <ShieldCheck className="w-4 h-4 text-cyber-blue" />
                <span className="text-[10px] font-mono text-white tracking-widest uppercase">Güvenilirlik Tarihçesi</span>
             </div>
-            <h2 className="text-6xl md:text-8xl font-bold font-syncopate tracking-tight text-white mb-6 uppercase">Mühendislik Mirası</h2>
-            <p className="text-neutral-500 font-mono text-sm uppercase tracking-widest">40 Yıldır her damlada aynı hassasiyet.</p>
+            <h2 className="text-4xl md:text-8xl font-bold font-syncopate tracking-tight text-white mb-6 uppercase">Mühendislik Mirası</h2>
+            <p className="text-neutral-500 font-mono text-xs md:text-sm uppercase tracking-widest">40 Yıldır her damlada aynı hassasiyet.</p>
           </header>
           <div className="relative border-l border-white/10 ml-4 md:ml-0 md:flex md:flex-col md:items-center">
             {milestones.map((milestone, i) => (
