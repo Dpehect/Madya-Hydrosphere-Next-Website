@@ -365,6 +365,10 @@ const HackathonUI = () => {
       </div>
       <div className="fixed inset-0 z-10 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/80" />
+      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-50 opacity-50">
+        <p className="text-[8px] font-mono text-cyber-blue uppercase tracking-[0.5em] whitespace-nowrap">
+          Bu proje SoftBridge Solutions ürünüdür
+        </p>
       </div>
     </div>
   );
